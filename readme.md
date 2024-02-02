@@ -17,7 +17,7 @@ wherein they could connect their CRM, and also generate graphs and charts offere
 by Sheets out of the box. In such cases, each response to the form becomes a row in
 the sheet, and questions in the form become columns.
 
-Further details
+Further details:
 
 We preempt that with time, more similar use cases will arise, with different “actions” being
 required once the response hits the primary store/database. We want to solve this problem
