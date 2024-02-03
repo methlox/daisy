@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/methlox/daisy/database"
+	// "github.com/methlox/daisy/database"
 	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-	database.ConnectDb()
+	// database.ConnectDb()
 
 	app := fiber.New()
 
