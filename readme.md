@@ -1,4 +1,4 @@
-# About Daisy:
+# About Daisy
 
 A data collection platform that is being used by customers in 50+ countries in over 250
 organizations and has powered data collection for over 11 million responses. Its features include team management, multilingual forms, and offline data collection. Customers use this platform to power their most critical activities — from governments delivering vaccines to small business owners managing their daily inventory, to a zoo monitoring a rare wildlife species.
@@ -12,7 +12,7 @@ wherein they could connect their CRM, and also generate graphs and charts offere
 by Sheets out of the box. In such cases, each response to the form becomes a row in
 the sheet, and questions in the form become columns_
 
-# Directory Structure:
+# Directory Structure
 - cmd
 - database
 - models
@@ -20,7 +20,7 @@ the sheet, and questions in the form become columns_
 
 _cmd_ contains the entry point of our application code where all the logic related to API is implemented. _database_ contains the logic for opening a connection with our postgres database to store forms, questions, responses and answers. _models_ consists of defined structs of our database tables which is provided to _cmd_ for storing and updating data. _sheets_ contains logic related to fetching data from our postgres server and making the data available on google sheets through Google Sheets API. 
 
-# API
+# Forms API
 The forms API allows us to create and fetch forms along with posting questions and retrieving answers
 ## API Routes
     - /create_form : allows us to create a form with questions
