@@ -1,51 +1,62 @@
-About the Product:
+# About Daisy:
 
-Imagine a data collection platform that is being used by customers in 50+ countries in over 250
-organizations and has powered data collection for over 11 million responses. Its features include
-team management, multilingual forms, and offline data collection. Customers use this platform to
-power their most critical activities — from governments delivering vaccines to small business
-owners managing their daily inventory, to a zoo monitoring a rare wildlife species.
-
-Problem Statement:
+A data collection platform that is being used by customers in 50+ countries in over 250
+organizations and has powered data collection for over 11 million responses. Its features include team management, multilingual forms, and offline data collection. Customers use this platform to power their most critical activities — from governments delivering vaccines to small business owners managing their daily inventory, to a zoo monitoring a rare wildlife species.
 
 The lifecycle of data collection via this platform does not end with the submission of a
 response. There is usually some post-submission business logic that the platform needs to
-support over time. Some real-life examples -
+support over time. The use case for which we solve in this codebase is -
 
-1. A very common need for organizations is wanting all their data onto Google Sheets,
+_A very common need for organizations is wanting all their data onto Google Sheets,
 wherein they could connect their CRM, and also generate graphs and charts offered
 by Sheets out of the box. In such cases, each response to the form becomes a row in
-the sheet, and questions in the form become columns.
+the sheet, and questions in the form become columns_
 
-Further details:
+# Directory Structure:
+- cmd
+- database
+- models
+- sheets
 
-We preempt that with time, more similar use cases will arise, with different “actions” being
-required once the response hits the primary store/database. We want to solve this problem
-in such a way that each new use case can just be “plugged in” and does not need an
-overhaul on the backend. Imagine this as a whole ecosystem for integrations. We want to
-optimize for latency and having a unified interface acting as a middleman.
+_cmd_ contains the entry point of our application code where all the logic related to API is implemented. _database_ contains the logic for opening a connection with our postgres database to store forms, questions, responses and answers. _models_ consists of defined structs of our database tables which is provided to _cmd_ for storing and updating data. _sheets_ contains logic related to fetching data from our postgres server and making the data available on google sheets through Google Sheets API. 
 
+# API
+The forms API allows us to create and fetch forms along with posting questions and retrieving answers
+## API Routes
+    - /create_form : allows us to create a form with questions
+	- /get_form : allows us to fetch a form
+	- /get_ques : allows us to fetch questions
+	- /create_ques : allows us to create questions
+	- /get_all_responses : allows us to fetch a list of all responses
+	- /get_response : allows us to fetch the answer of a question
 
-Design a sample schematic for how you would store forms (with questions) and responses
-(with answers) in the data store. Forms, Questions, Responses and Answers each will have
-relevant metadata. Design and implement a solution for the Google Sheets use case and
-choose any one of the others to keep in mind how we want to solve this problem in a
-plug-n-play fashion. Make fair assumptions wherever necessary.
+## Schemas
+```
+CREATE TABLE form {
+    id SERIAL PRIMARY KEY
+    title TEXT NOT NULL
+    description TEXT
+    created_at DATETIME
+}
 
-Eventual consistency is what the clients expect as an outcome of this feature, making sure
-no responses get missed in the journey. Do keep in mind that this solution must be failsafe,
-should eventually recover from circumstances like power/internet/service outages, and
-should scale to cases like millions of responses across hundreds of forms for an
-organization.
+CREATE TABLE question {
+    id SERIAL PRIMARY KEY
+    form_id SERIAL
+    question_text TEXT NOT NULL
+    question_order INT
+    created_at DATETIME
+}
 
-There are points for details on how would you benchmark, set up logs, monitor for system
-health, and alerts for when the system health is affected for both the cloud as well as
-bare-metal. Read up on if there are limitations on the third party ( Google sheets in this
-case ) too, a good solution keeps in mind that too.
+CREATE TABLE formResponse {
+    id SERIAL PRIMARY KEY
+    form_id SERIAL
+    responded_at DATETIME
+}
 
-The deliverable upon completion of the task is a zip file containing
-● design specification
-● a brief but comprehensive explanation for the various approaches you can think of to
-solve for this and why you went ahead with the approach that you did - i.e a pro/con
-analysis
-● the codebase
+CREATE TABLE response {
+    id SERIAL PRIMARY KEY
+    response_id SERIAL
+    question_id SERIAL
+    answer TEXT NOT NULL
+}
+```
