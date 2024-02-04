@@ -23,12 +23,12 @@ _cmd_ contains the entry point of our application code where all the logic relat
 # Forms API
 The forms API allows us to create and fetch forms along with posting questions and retrieving answers
 ## API Routes
-    - /create_form : allows us to create a form with questions
-	- /get_form : allows us to fetch a form
-	- /get_ques : allows us to fetch questions
-	- /create_ques : allows us to create questions
-	- /get_all_responses : allows us to fetch a list of all responses
-	- /get_response : allows us to fetch the answer of a question
+    - /create_form          allows us to create a form with questions
+	- /get_form             allows us to fetch a form
+	- /get_ques             allows us to fetch questions
+	- /create_ques          allows us to create questions
+	- /get_all_responses    allows us to fetch a list of all responses
+	- /get_response         allows us to fetch the answer of a question
 
 ## Schemas
 ```
