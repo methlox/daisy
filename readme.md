@@ -60,3 +60,13 @@ CREATE TABLE response {
     answer TEXT NOT NULL
 }
 ```
+
+### Flow Diagram
+
+![flow-diagram](image.png)
+
+# Google Sheets API
+
+Google Sheets API has following limitations and it needs to be handled in case of excessive requests from clients to server:
+
+![google sheets api limitations](image-1.png)
